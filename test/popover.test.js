@@ -5,13 +5,22 @@ describe('Popover Tests', () => {
     let page;
 
     beforeAll(async () => {
-        browser = await puppeteer.launch({ headless: true });
-        page = await browser.newPage();
-        await page.goto('http://localhost:9000');
+        try {
+            browser = await puppeteer.launch({
+                headless: true,
+                args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
+            page = await browser.newPage();
+            await page.goto('http://localhost:9000');
+        } catch (error) {
+            console.error('Failed to launch browser:', error);
+        }
     });
 
     afterAll(async () => {
-        await browser.close();
+        if (browser) {
+            await browser.close();
+        }
     });
 
     test('Popover should be visible after button click', async () => {
