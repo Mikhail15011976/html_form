@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.11.0
+          node-version: 20.12.0
           cache: 'yarn'
       - run: yarn
       - run: yarn lint
@@ -38,11 +38,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.11.0
+          node-version: 20.11.0
           cache: 'yarn'
-      - run: yarn      
-      - run: yarn test -- --no-sandbox
-
+      - run: yarn
+      - run: yarn test
 
   build:
     needs: [eslint, test]
@@ -57,7 +56,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.11.0
+          node-version: 20.11.0
           cache: 'yarn'
       - run: yarn
       - run: yarn build
